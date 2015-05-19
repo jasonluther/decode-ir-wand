@@ -9,13 +9,16 @@
    * Add `dtoverlay=lirc-rpi` to `/boot/config.txt' and reboot
  * [IR receiver module](https://www.sparkfun.com/products/10266) [connected to 3V3, GND, and GPIO pin 18](https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/hardware)
    * Test with `$ mode2 -d /dev/lirc0`. You should see something like this when you wave the wand:
-```space 3034972
-pulse 270
-space 847
-pulse 253
-space 880
-pulse 278
-```
+
+    ```text
+    space 3034972
+    pulse 270
+    space 847
+    pulse 253
+    space 880
+    pulse 278
+    ...
+    ```
 
 #### Usage
 
