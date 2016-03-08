@@ -13,8 +13,7 @@ void dumpWandId (decode_results *results) {
   int result_i = 0;
   unsigned char current_byte;
   if (results->rawlen == 112) {
-    Serial.print(results->rawlen);
-    Serial.print(" Wand: ");
+    Serial.print("Wand: ");
     for (int i = 1;  i < results->rawlen;  i+= 2) {
       int pulse = results->rawbuf[i];
       int space = results->rawbuf[i+1];
@@ -22,13 +21,10 @@ void dumpWandId (decode_results *results) {
       result_i = (i-1) / 16;
       if ((i-1) % 16 == 0) {
         result[result_i] = 0;
-     }
+      }
       result[result_i] |= bit << (7 - (((i-1) % 16)/2));
-      Serial.print(bit);
-      Serial.print(" ");
     }
-    Serial.print("  Bytes: ");
-    for (int i = 0; i < 7; i++) {
+    for (int i = 1; i < 4; i++) {
       Serial.print(result[i], HEX);
       Serial.print(" ");
     }
