@@ -1,5 +1,7 @@
 # Decoding MagiQuest IR Wands with lirc
 
+**Update 2019**: others have done a much nicer job of decoding wand transmissions recently. See the *References* below. 
+
 #### Requirements
 
  * [MagiQuest](http://www.magiquest.com) wand
@@ -50,6 +52,8 @@ The format may actually be more complex, but this allows me to reliably identify
 
 #### References
 
+ * <http://devinhenkel.com/compelling/update-magiquest-wand-code/>
+ * <https://github.com/patricknevindwyer/arduino-magiquest>
  * <http://openschemes.com/2013/02/27/mq-widget-pic12f508-controlled-magiquest-toy/>
  * <https://github.com/mpflaga/Arduino-IRremote>
  * <https://forum.sparkfun.com/viewtopic.php?t=19070>
