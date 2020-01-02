@@ -5,15 +5,12 @@
 #### Requirements
 
  * [MagiQuest](http://www.magiquest.com) wand
- * Raspberry Pi (tested on Raspbian) with Perl
- * [lirc](http://www.lirc.org)
-   * `$ apt-get install lirc`
-   * Add `dtoverlay=lirc-rpi` to `/boot/config.txt' and reboot
+ * Raspberry Pi (tested on Raspbian Buster) with Perl
+ * Add `dtoverlay=gpio-ir,gpio_pin=18` to `/boot/config.txt' and reboot
  * [IR receiver module](https://www.sparkfun.com/products/10266) [connected to 3V3, GND, and GPIO pin 18](https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/hardware)
-   * Test with `$ mode2 -d /dev/lirc0`. You should see something like this when you wave the wand:
+   * Test with `$ ir-ctl -d /dev/lirc0 -r`. You should see something like this when you wave the wand:
 
     ```text
-    space 3034972
     pulse 270
     space 847
     pulse 253
@@ -34,9 +31,9 @@ Each time a wand ID is decoded successfully, it will print in this format:
 
 See the references below for background information. This script is largely based on the work that other people did to figure out how the wands work. 
 
-The script watches the output of `mode2 -d /dev/lirc0` and reads the *space*/*pulse* timing. 
+The script watches the output of `ir-ctl -r` and reads the *space*/*pulse* timing. 
 
-The wand transmits 56 bits of information. Each bit has a duty cycle of about 1150 (in whatever units mode2 gives you), where the duty cycle is the total time of each *space* and *pulse* pair. 
+The wand transmits 56 bits of information. Each bit has a duty cycle of about 1150 microseconds, where the duty cycle is the total time of each *space* and *pulse* pair. 
 
 A pulse that takes up under 1/3 of the duty cycle is translated to *0*, and a pulse that takes more than 1/3 of the duty cycle is *1*. 
 
