@@ -3,7 +3,6 @@ const readline = require('readline');
 const util = require('util');
 var spawn = require('child_process').spawn;
 var irdata = spawn('/usr/bin/ir-ctl', ['-r']);
-//var irdata = spawn('/bin/cat', ['./new.txt']);
 
 console.log("Started");
 
@@ -15,26 +14,13 @@ var ir_last_space_time = 0;
 var ir_last_duty_cycle = 0;
 const ir_duration_cutoff = 0.3481;
 
-var lines_buffer = [];
-
 irdata.stdout.on('data', function(data) {
   var str = data.toString();
   var lines = str.split(/\n/g);
-  lines_buffer.push(lines);
-});
-
-function waitForLines() {
-  if (lines_buffer.length > 0) {
-    var lines = lines_buffer.shift();
-    for (var i=0; i < lines.length; i++) {
-      handleLine(lines[i]);
-    }
-  } else {
-    //console.log('waiting');
+  for (var i=0; i < lines.length; i++) {
+    handleLine(lines[i]);
   }
-}
-
-setInterval(waitForLines, 100);
+});
 
 function handleLine(line) {
   var m;
